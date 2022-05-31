@@ -81,7 +81,10 @@ export default function MDXLayout({ data = {} }) {
     if (urlPathName) {
         urlPathName = urlPathName.split("/");
         urlPathName = urlPathName[urlPathName.length - 1];
-        apiObj.v1[urlPathName].status = true;
+        if(apiObj.v1[urlPathName])
+          apiObj.v1[urlPathName].status = true;
+        else
+          console.log(urlPathName, "urlPathName");
     }
   }
 
