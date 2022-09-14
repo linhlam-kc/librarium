@@ -207,6 +207,359 @@
         }
       ]
     },
+    "/v1/appProfiles": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Creates a application profile",
+        "operationId": "v1AppProfilesCreate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppProfileEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created successfully",
+            "schema": {
+              "$ref": "#/definitions/v1Uid"
+            },
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/appProfiles/{uid}": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the specified application profile",
+        "operationId": "v1AppProfilesUidGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1AppProfile"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the specified application profile",
+        "operationId": "v1AppProfilesUidUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppProfileEntity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Deletes the specified application profile",
+        "operationId": "v1AppProfilesUidDelete",
+        "responses": {
+          "204": {
+            "description": "The resource was deleted successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appProfiles/{uid}/metadata": {
+      "patch": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the specified application profile metadata",
+        "operationId": "v1AppProfilesUidMetadataUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppProfileMetaEntity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appProfiles/{uid}/tiers": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns all tiers of the specified application profile",
+        "operationId": "v1AppProfilesUidTiersGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1AppProfileTiers"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Adds tier to the specified application profile",
+        "operationId": "v1AppProfilesUidTiersCreate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppTierEntity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appProfiles/{uid}/tiers/{tierUid}": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the specified application profile's tier information",
+        "operationId": "v1AppProfilesUidTiersUidGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1AppTier"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the specified application profile's tier information",
+        "operationId": "v1AppProfilesUidTiersUidUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppTierUpdateEntity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Deletes the specified application profile's tier",
+        "operationId": "v1AppProfilesUidTiersUidDelete",
+        "responses": {
+          "204": {
+            "description": "The resource was deleted successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "tierUid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appProfiles/{uid}/tiers/{tierUid}/manifests": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns all manifests of the specified application profile's tier",
+        "operationId": "v1AppProfilesUidTiersUidManifestsGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1AppTierManifests"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Adds manifest to the specified application profile's tier",
+        "operationId": "v1AppProfilesUidTiersUidManifestsCreate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1ManifestInputEntity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "tierUid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appProfiles/{uid}/tiers/{tierUid}/manifests/{manifestUid}": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the specified application tier's manifest information",
+        "operationId": "v1AppProfilesUidTiersUidManifestsUidGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1Manifest"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the specified application tier's manifest information",
+        "operationId": "v1AppProfilesUidTiersUidManifestsUidUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1ManifestRefUpdateEntity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Deletes the specified application tier's manifest",
+        "operationId": "v1AppProfilesUidTiersUidManifestsUidDelete",
+        "responses": {
+          "204": {
+            "description": "The resource was deleted successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "tierUid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "manifestUid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/v1/async/ops/{opsId}/status": {
       "get": {
         "tags": [
@@ -904,6 +1257,68 @@
           }
         }
       }
+    },
+    "/v1/auth/sso/logins": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the list of supported sso logins",
+        "operationId": "V1SsoLogins",
+        "responses": {
+          "200": {
+            "description": "(empty)",
+            "schema": {
+              "$ref": "#/definitions/v1SsoLogins"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/sso/{ssoApp}/callback": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "sso authorization code callback",
+        "operationId": "V1SsoCallback",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1UserToken"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "ssoApp",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "code",
+          "in": "query"
+        },
+        {
+          "type": "string",
+          "name": "state",
+          "in": "query"
+        },
+        {
+          "type": "string",
+          "name": "error",
+          "in": "query"
+        },
+        {
+          "type": "string",
+          "name": "error_description",
+          "in": "query"
+        }
+      ]
     },
     "/v1/auth/syslogin": {
       "post": {
@@ -2501,6 +2916,38 @@
             "schema": {
               "$ref": "#/definitions/v1VsphereDatacenters"
             }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/cloudaccounts/{uid}/geoLocation": {
+      "patch": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Update the geolocation annotation",
+        "operationId": "v1AccountsGeolocationPatch",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GeolocationLatlong"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
           }
         }
       },
@@ -9024,6 +9471,292 @@
         }
       }
     },
+    "/v1/clustergroups": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Create cluster groups",
+        "operationId": "v1ClusterGroupsCreate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created successfully",
+            "schema": {
+              "$ref": "#/definitions/v1Uid"
+            },
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/clustergroups/teams/{teamUid}/roles": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the specified team's cluster groups and roles data",
+        "operationId": "v1TeamsClusterGroupGetRoles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupsScopeRoles"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the cluster group roles for the specified team",
+        "operationId": "v1TeamsClusterGroupRolesPut",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupsRolesPatch"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "teamUid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/clustergroups/users/{userUid}/roles": {
+      "get": {
+        "description": "Returns the cluster groups and roles for the user",
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the specified user cluster groups and Roles information",
+        "operationId": "v1UsersClusterGroupGetRoles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupsScopeRoles"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the cluster group roles for the user",
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the cluster group roles for the user",
+        "operationId": "v1UsersClusterGroupRolesPut",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupsRolesPatch"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "userUid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/clustergroups/validate/name": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Validates the cluster groups name",
+        "operationId": "v1ClusterGroupsValidateName",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "name",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ok reponse without content",
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/clustergroups/{uid}": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the specified cluster groups",
+        "operationId": "v1ClusterGroupsUidGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroup"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Deletes the specified cluster group",
+        "operationId": "v1ClusterGroupsUidDelete",
+        "responses": {
+          "204": {
+            "description": "The resource was deleted successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/clustergroups/{uid}/clusters": {
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the specified cluster groups clusters",
+        "operationId": "v1ClusterGroupsUidClustersUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupClusterRefs"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/clustergroups/{uid}/hostCluster/config": {
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the host cluster config in cluster group",
+        "operationId": "v1ClusterGroupsUidHostClusterConfigUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupHostClusterConfigEntity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/clustergroups/{uid}/meta": {
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Updates the specified cluster groups meta",
+        "operationId": "v1ClusterGroupsUidMetaUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1ObjectMeta"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/v1/clusterprofiles": {
       "get": {
         "description": "Deprecated: Use POST /v1/dashboard/clusterprofiles",
@@ -10160,6 +10893,53 @@
         }
       ]
     },
+    "/v1/dashboard/appProfiles": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Retrieves a list of application profiles filter summary Supported filter fields - [\"profileName\", \"tags\"] Supported sort fields - [\"profileName\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+        "operationId": "v1DashboardAppProfiles",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "default": 50,
+            "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "continue token to paginate the subsequent data items",
+            "name": "continue",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppProfilesFilterSpec"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of application profiles summary items",
+            "schema": {
+              "$ref": "#/definitions/v1AppProfilesSummary"
+            }
+          }
+        }
+      }
+    },
     "/v1/dashboard/appliances/metadata": {
       "post": {
         "tags": [
@@ -10191,7 +10971,7 @@
         "tags": [
           "v1"
         ],
-        "summary": "Retrieves a list of cluster profiles filter summary. \n Supported filter fields - [\"profileName\", \"tags\", \"profileType\", \"environment\"]. \n Supported sort fields - [\"profileName\", \"environment\", \"profileType\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+        "summary": "Retrieves a list of cluster profiles filter summary Supported filter fields - [\"profileName\", \"tags\", \"profileType\", \"environment\"] Supported sort fields - [\"profileName\", \"environment\", \"profileType\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
         "operationId": "v1ClusterProfilesFilterSummary",
         "parameters": [
           {
@@ -10420,7 +11200,7 @@
         "tags": [
           "v1"
         ],
-        "summary": "Retrieves a list of cluster summary with provided filter spec. \n Supported filter fields - [\"cpuUsage\", \"memoryUsage\", \"clusterName\", \"tags\", \"healthState\", \"clusterStates\", \"isDeleted\", \"environments\", \"metricPeriod\"]. \n Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+        "summary": "Retrieves a list of cluster summary with provided filter spec Supported filter fields - [\"cpuUsage\", \"memoryUsage\", \"clusterName\", \"tags\", \"healthState\", \"clusterStates\", \"isDeleted\", \"environments\", \"metricPeriod\"] Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
         "operationId": "v1SpectroClustersFilterSummary",
         "parameters": [
           {
@@ -10579,6 +11359,70 @@
         }
       }
     },
+    "/v1/dashboard/spectroclusters/metadata/search": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Retrieves a list of cluster metadata with provided search filter spec Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+        "operationId": "v1SpectroClustersMetadataSearch",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "default": 50,
+            "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "continue token to paginate the subsequent data items",
+            "name": "continue",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1SpectroClusterSearchSummarySpec"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of cluster summary meta items",
+            "schema": {
+              "$ref": "#/definitions/v1SpectroClustersMetadataSearch"
+            }
+          }
+        }
+      }
+    },
+    "/v1/dashboard/spectroclusters/metadata/search/schema": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Retrieves a schema for the cluster metadata search filter",
+        "operationId": "v1SpectroClustersMetadataSearchSchema",
+        "responses": {
+          "200": {
+            "description": "An array of cluster meta schema items",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterSearchMetaSchemaSpec"
+            }
+          }
+        }
+      }
+    },
     "/v1/dashboard/spectroclusters/resources/consumption": {
       "post": {
         "tags": [
@@ -10662,7 +11506,7 @@
         "tags": [
           "v1"
         ],
-        "summary": "Retrieves a list of cluster summary with provided search filter spec Supported filter fields - [\"cpuUsage\", \"memoryUsage\", \"clusterName\", \"tags\", \"healthState\", \"clusterStates\", \"isDeleted\", \"environments\", \"metricPeriod\"] Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+        "summary": "Retrieves a list of cluster summary with provided search filter spec Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
         "operationId": "v1SpectroClustersSearchFilterSummary",
         "parameters": [
           {
@@ -11517,7 +12361,7 @@
           {
             "enum": [
               "libvirt",
-              "edge",
+              "edge-native",
               "vsphere"
             ],
             "type": "string",
@@ -11795,7 +12639,7 @@
           "200": {
             "description": "Pack manifest content",
             "schema": {
-              "$ref": "#/definitions/v1PackManifest"
+              "$ref": "#/definitions/v1Manifest"
             }
           }
         }
@@ -15863,6 +16707,135 @@
         }
       }
     },
+    "/v1/pcg/selfHosted": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the private gateway manifest link",
+        "operationId": "v1PcgSelfHosted",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1PcgSelfHostedParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(empty)",
+            "schema": {
+              "$ref": "#/definitions/v1PcgServiceKubectlCommands"
+            }
+          }
+        }
+      }
+    },
+    "/v1/pcg/{uid}/register": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Registers the pcg",
+        "operationId": "v1PcgUidRegister",
+        "parameters": [
+          {
+            "name": "pairingCode",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1PairingCode"
+            }
+          },
+          {
+            "type": "string",
+            "name": "uid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ok reponse without content",
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pcg/{uid}/services/ally-read-only/manifest": {
+      "get": {
+        "produces": [
+          "application/octet-stream"
+        ],
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the pcg ally manifest",
+        "operationId": "v1PcgUidAllyManifestGet",
+        "responses": {
+          "200": {
+            "description": "download file",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            },
+            "headers": {
+              "Content-Disposition": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/pcg/{uid}/services/jet/manifest": {
+      "get": {
+        "produces": [
+          "application/octet-stream"
+        ],
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the pcg jet manifest",
+        "operationId": "v1PcgUidJetManifestGet",
+        "responses": {
+          "200": {
+            "description": "download file",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            },
+            "headers": {
+              "Content-Disposition": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/v1/permissions": {
       "get": {
         "tags": [
@@ -19472,6 +20445,27 @@
         }
       }
     },
+    "/v1/spectroclusters/internal/location": {
+      "put": {
+        "tags": [
+          "v1",
+          "private"
+        ],
+        "summary": "Migrate location data for all the cluster meta objects on demand",
+        "operationId": "v1ClustersLocationUpdate",
+        "responses": {
+          "204": {
+            "description": "Ok reponse without content",
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/spectroclusters/internal/tenants/{tenantUid}/activeClusters": {
       "get": {
         "tags": [
@@ -22105,6 +23099,43 @@
         }
       ]
     },
+    "/v1/spectroclusters/{uid}/location": {
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Associate the assets for the cluster",
+        "operationId": "v1SpectroClustersUidLocationPut",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1SpectroClusterLocationInputEntity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ok reponse without content",
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/v1/spectroclusters/{uid}/metadata": {
       "patch": {
         "tags": [
@@ -22186,6 +23217,7 @@
           {
             "type": "boolean",
             "default": false,
+            "description": "resolve pack manifest values if set to true",
             "name": "resolveManifestValues",
             "in": "query"
           }
@@ -22194,7 +23226,7 @@
           "200": {
             "description": "Pack manifest content",
             "schema": {
-              "$ref": "#/definitions/v1PackManifest"
+              "$ref": "#/definitions/v1Manifest"
             }
           }
         }
@@ -24736,6 +25768,68 @@
             "description": "(empty)",
             "schema": {
               "$ref": "#/definitions/v1Updated"
+            }
+          }
+        }
+      }
+    },
+    "/v1/system/config/sso/github/validate": {
+      "put": {
+        "tags": [
+          "v1",
+          "system"
+        ],
+        "summary": "validates the system sso for github",
+        "operationId": "V1SystemConfigSsoGithubValidate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SystemGithubSsoSpec"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ok reponse without content",
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/system/config/sso/oidc/validate": {
+      "put": {
+        "tags": [
+          "v1",
+          "system"
+        ],
+        "summary": "validates the system sso for oidc based logins",
+        "operationId": "V1SystemConfigSsoOidcValidate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SystemOidcClientSpec"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ok reponse without content",
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
             }
           }
         }
@@ -27464,6 +28558,52 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/v1TenantSamlRequestSpec"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "tenantUid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/v1/tenants/{tenantUid}/sso/loginModes": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "get sso logins for the tenants",
+        "operationId": "V1TenantUidSsoLoginModesGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1TenantSsoLoginEntity"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "enable sso logins for the tenants",
+        "operationId": "V1TenantUidSsoLoginModesUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1TenantSsoLoginEntity"
             }
           }
         ],
@@ -30270,6 +31410,440 @@
         }
       }
     },
+    "v1AppProfile": {
+      "description": "Application profile response",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "type": "object",
+          "properties": {
+            "parentUid": {
+              "type": "string"
+            },
+            "template": {
+              "$ref": "#/definitions/v1AppProfileTemplate"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "v1AppProfileEntity": {
+      "description": "Application profile input for create and update",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "$ref": "#/definitions/v1AppProfileTemplateEntity"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "v1AppProfileFilterSpec": {
+      "description": "Application profile filter spec",
+      "properties": {
+        "profileName": {
+          "$ref": "#/definitions/v1FilterString"
+        },
+        "tags": {
+          "$ref": "#/definitions/v1FilterArray"
+        },
+        "version": {
+          "$ref": "#/definitions/v1FilterVersionString"
+        }
+      }
+    },
+    "v1AppProfileMetaEntity": {
+      "description": "Application profile meta input entity",
+      "type": "object",
+      "required": [
+        "metadata"
+      ],
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMetaInputEntity"
+        }
+      }
+    },
+    "v1AppProfileSortFields": {
+      "type": "string",
+      "enum": [
+        "profileName",
+        "creationTimestamp",
+        "lastModifiedTimestamp"
+      ],
+      "x-nullable": true
+    },
+    "v1AppProfileSortSpec": {
+      "properties": {
+        "field": {
+          "$ref": "#/definitions/v1AppProfileSortFields"
+        },
+        "order": {
+          "$ref": "#/definitions/v1SortOrder"
+        }
+      }
+    },
+    "v1AppProfileSummary": {
+      "description": "Application profile summary",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "description": "Application profile spec summary",
+          "type": "object",
+          "properties": {
+            "parentUid": {
+              "type": "string"
+            },
+            "template": {
+              "$ref": "#/definitions/v1AppProfileTemplateSummary"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "v1AppProfileTemplate": {
+      "description": "Application profile template information",
+      "type": "object",
+      "properties": {
+        "appTiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1AppTierRef"
+          }
+        },
+        "registryRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ObjectReference"
+          }
+        }
+      }
+    },
+    "v1AppProfileTemplateEntity": {
+      "description": "Application profile template entity",
+      "type": "object",
+      "properties": {
+        "appTiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1AppTierEntity"
+          }
+        }
+      }
+    },
+    "v1AppProfileTemplateSummary": {
+      "description": "Application profile template summary",
+      "type": "object",
+      "properties": {
+        "appTiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AppTierSummary"
+          }
+        }
+      }
+    },
+    "v1AppProfileTiers": {
+      "description": "Application profile tiers information",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1AppProfileTiersSpec"
+        }
+      }
+    },
+    "v1AppProfileTiersSpec": {
+      "description": "Application profile tiers information",
+      "type": "object",
+      "properties": {
+        "appTiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1AppTier"
+          }
+        }
+      }
+    },
+    "v1AppProfilesFilterSpec": {
+      "description": "Application profile filter summary spec",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/v1AppProfileFilterSpec"
+        },
+        "sort": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1AppProfileSortSpec"
+          }
+        }
+      }
+    },
+    "v1AppProfilesSummary": {
+      "type": "object",
+      "properties": {
+        "appProfiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1AppProfileSummary"
+          }
+        },
+        "listmeta": {
+          "$ref": "#/definitions/v1ListMetaData"
+        }
+      }
+    },
+    "v1AppTier": {
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1AppTierSpec"
+        }
+      }
+    },
+    "v1AppTierEntity": {
+      "description": "App tier input entity for the initial creation",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "installOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "manifests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ManifestInputEntity"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AppTierProperty"
+          }
+        },
+        "registryUid": {
+          "type": "string"
+        },
+        "sourceAppTierUid": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/v1AppTierType"
+        },
+        "values": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppTierManifests": {
+      "description": "Application tier manifests data",
+      "properties": {
+        "manifests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Manifest"
+          }
+        }
+      }
+    },
+    "v1AppTierProperty": {
+      "description": "Application tier properties",
+      "properties": {
+        "format": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppTierRef": {
+      "description": "Application tier reference",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Application Tier name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Application Tier type",
+          "$ref": "#/definitions/v1AppTierType"
+        },
+        "uid": {
+          "description": "Application Tier uid to uniquely identify the tier",
+          "type": "string"
+        },
+        "version": {
+          "description": "Application Tier version",
+          "type": "string"
+        }
+      }
+    },
+    "v1AppTierSpec": {
+      "description": "Application tier specs",
+      "type": "object",
+      "properties": {
+        "installOrder": {
+          "description": "Application Tier installation order",
+          "type": "integer",
+          "format": "int32"
+        },
+        "manifests": {
+          "description": "Application Tier attached manifest content in yaml format",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ObjectReference"
+          }
+        },
+        "properties": {
+          "description": "Application Tier properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AppTierProperty"
+          }
+        },
+        "registryUid": {
+          "description": "Registry uid",
+          "type": "string"
+        },
+        "sourceAppTierUid": {
+          "description": "Application Tier source reference uid",
+          "type": "string"
+        },
+        "type": {
+          "description": "Application Tier type",
+          "$ref": "#/definitions/v1AppTierType"
+        },
+        "values": {
+          "description": "Application Tier configuration values in yaml format",
+          "type": "string"
+        },
+        "version": {
+          "description": "Application Tier version",
+          "type": "string"
+        }
+      }
+    },
+    "v1AppTierSummary": {
+      "description": "Application profile's tier summary",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppTierType": {
+      "type": "string",
+      "default": "manifest",
+      "enum": [
+        "manifest",
+        "helm",
+        "db",
+        "system",
+        "container"
+      ]
+    },
+    "v1AppTierUpdateEntity": {
+      "description": "App tier update entity for the initial creation",
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "installOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "manifests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ManifestRefUpdateEntity"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AppTierProperty"
+          }
+        },
+        "registryUid": {
+          "type": "string"
+        },
+        "sourceAppTierUid": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/v1AppTierType"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "values": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
     "v1AppVersion": {
       "description": "spectro application management app version information",
       "properties": {
@@ -31629,6 +33203,9 @@
         "controlPlaneSubnet": {
           "description": "Subnet for Kubernetes control-plane node",
           "$ref": "#/definitions/v1Subnet"
+        },
+        "enablePrivateCluster": {
+          "type": "boolean"
         },
         "location": {
           "description": "Location is the Azure datacenter location",
@@ -33151,6 +34728,171 @@
         }
       }
     },
+    "v1ClusterGroup": {
+      "description": "Cluster group information",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1ClusterGroupSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/v1ClusterGroupStatus"
+        }
+      }
+    },
+    "v1ClusterGroupClusterRef": {
+      "description": "Cluster group cluster reference",
+      "properties": {
+        "clusterName": {
+          "type": "string"
+        },
+        "clusterUid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterGroupClusterRefs": {
+      "description": "Cluster group clusters reference",
+      "properties": {
+        "clusterRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1ClusterGroupClusterRef"
+          }
+        }
+      }
+    },
+    "v1ClusterGroupClustersConfig": {
+      "description": "Cluster group clusters config",
+      "properties": {
+        "hostClusterConfig": {
+          "$ref": "#/definitions/v1HostClusterConfig"
+        }
+      }
+    },
+    "v1ClusterGroupEntity": {
+      "description": "Cluster group information",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1ClusterGroupSpec"
+        }
+      }
+    },
+    "v1ClusterGroupHostClusterConfigEntity": {
+      "description": "Host cluster config in cluster group update entity",
+      "properties": {
+        "hostClusterConfig": {
+          "$ref": "#/definitions/v1HostClusterConfig"
+        }
+      }
+    },
+    "v1ClusterGroupRoles": {
+      "description": "Users cluster group and their roles",
+      "properties": {
+        "inheritedRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ClusterGroupRolesUidSummary"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ClusterGroupRolesUidSummary"
+          }
+        },
+        "uid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterGroupRolesPatch": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterGroupRolesUidSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterGroupSpec": {
+      "description": "Cluster group specifications",
+      "properties": {
+        "clusterRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1ClusterGroupClusterRef"
+          }
+        },
+        "clustersConfig": {
+          "$ref": "#/definitions/v1ClusterGroupClustersConfig"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "hostCluster"
+          ]
+        }
+      }
+    },
+    "v1ClusterGroupStatus": {
+      "description": "Cluster group status",
+      "properties": {
+        "isActive": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1ClusterGroupsRolesPatch": {
+      "type": "object",
+      "properties": {
+        "clusterGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ClusterGroupRolesPatch"
+          }
+        }
+      }
+    },
+    "v1ClusterGroupsScopeRoles": {
+      "description": "List all cluster group with the roles assigned to the user",
+      "properties": {
+        "clusterGroups": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1ClusterGroupRoles"
+          }
+        }
+      }
+    },
     "v1ClusterHelmChart": {
       "description": "Cluster helm chart metadata",
       "properties": {
@@ -33403,6 +35145,65 @@
         },
         "uid": {
           "type": "string"
+        }
+      }
+    },
+    "v1ClusterMetaSpecLocation": {
+      "description": "Cluster location information",
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float64"
+          }
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterMetaStatusCost": {
+      "description": "Cluster meta Cost information",
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number",
+          "format": "float64",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1ClusterMetaStatusHealth": {
+      "description": "Cluster meta health information",
+      "type": "object",
+      "properties": {
+        "isHeartBeatFailed": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterMetaStatusUpdates": {
+      "description": "Cluster meta updates information",
+      "type": "object",
+      "properties": {
+        "isUpdatesPending": {
+          "type": "boolean",
+          "x-omitempty": false
         }
       }
     },
@@ -34658,6 +36459,71 @@
         },
         "startTime": {
           "$ref": "#/definitions/v1Time"
+        }
+      }
+    },
+    "v1ClusterSearchMetaSchemaSpec": {
+      "properties": {
+        "schema": {
+          "$ref": "#/definitions/v1ClusterSearchMetaSchemaSpecProperties"
+        }
+      }
+    },
+    "v1ClusterSearchMetaSchemaSpecProperties": {
+      "properties": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ClusterSearchMetaSchemaSpecProperty"
+          }
+        }
+      }
+    },
+    "v1ClusterSearchMetaSchemaSpecProperty": {
+      "properties": {
+        "default": {
+          "type": "string",
+          "x-order": 4
+        },
+        "displayName": {
+          "type": "string",
+          "x-order": 1
+        },
+        "enum": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-omitempty": true,
+          "x-order": 3
+        },
+        "maxFloatVal": {
+          "type": "number",
+          "format": "float64",
+          "x-order": 8
+        },
+        "maxIntVal": {
+          "type": "integer",
+          "format": "int32",
+          "x-order": 6
+        },
+        "minFloatVal": {
+          "type": "number",
+          "format": "float64",
+          "x-order": 7
+        },
+        "minIntVal": {
+          "type": "integer",
+          "format": "int32",
+          "x-order": 5
+        },
+        "name": {
+          "type": "string",
+          "x-order": 0
+        },
+        "type": {
+          "type": "string",
+          "x-order": 2
         }
       }
     },
@@ -36166,8 +38032,8 @@
           "type": "string",
           "enum": [
             "libvirt",
-            "edge",
-            "vsphere"
+            "vsphere",
+            "edge-native"
           ]
         },
         "version": {
@@ -38652,6 +40518,22 @@
         },
         "publicIp": {
           "type": "string"
+        }
+      }
+    },
+    "v1GeolocationLatlong": {
+      "description": "Geolocation Latlong",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "float64",
+          "x-omitempty": false
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float64",
+          "x-omitempty": false
         }
       }
     },
@@ -41396,6 +43278,17 @@
         }
       }
     },
+    "v1Manifest": {
+      "description": "Manifest data",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1ManifestPublishedSpec"
+        }
+      }
+    },
     "v1ManifestData": {
       "description": "Manifest data",
       "type": "object",
@@ -41513,7 +43406,7 @@
       }
     },
     "v1ManifestSummary": {
-      "description": "Manfiest summary information",
+      "description": "Manifest summary information",
       "properties": {
         "content": {
           "description": "Manifest content",
@@ -44574,6 +46467,11 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "rebootIfRequired": {
+          "description": "Reboot once the OS patch is applied",
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "schedule": {
           "description": "The schedule at which security patches will be applied to OS. Schedule should be in Cron format, see https://en.wikipedia.org/wiki/Cron for more help.",
           "type": "string"
@@ -45020,17 +46918,6 @@
         "addon"
       ]
     },
-    "v1PackManifest": {
-      "description": "Pack manifest data",
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/v1ObjectMeta"
-        },
-        "spec": {
-          "$ref": "#/definitions/v1ManifestPublishedSpec"
-        }
-      }
-    },
     "v1PackManifestEntity": {
       "description": "Pack input entity with values to overwrite and manifests for the intial creation",
       "type": "object",
@@ -45160,7 +47047,7 @@
           "type": "array",
           "uniqueItems": true,
           "items": {
-            "$ref": "#/definitions/v1PackManifest"
+            "$ref": "#/definitions/v1Manifest"
           }
         }
       }
@@ -46182,6 +48069,35 @@
           "type": "string"
         },
         "subscriptionState": {
+          "type": "string"
+        }
+      }
+    },
+    "v1PcgSelfHostedParams": {
+      "properties": {
+        "cloudType": {
+          "$ref": "#/definitions/v1CloudType"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1PcgServiceKubectlCommands": {
+      "description": "Array of kubectl commands",
+      "type": "object",
+      "required": [
+        "kubectlCommands"
+      ],
+      "properties": {
+        "kubectlCommands": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "overlordUid": {
           "type": "string"
         }
       }
@@ -49261,6 +51177,88 @@
         }
       }
     },
+    "v1SpectroClusterLocationInputEntity": {
+      "description": "Spectro cluster location",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "object",
+          "properties": {
+            "countryCode": {
+              "type": "string"
+            },
+            "countryName": {
+              "type": "string"
+            },
+            "geoLoc": {
+              "$ref": "#/definitions/v1GeolocationLatlong"
+            },
+            "regionCode": {
+              "type": "string"
+            },
+            "regionName": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "v1SpectroClusterMetaSummary": {
+      "description": "Spectro cluster meta summary",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "specSummary": {
+          "description": "Spectro cluster meta summary",
+          "type": "object",
+          "properties": {
+            "cloudAccountUid": {
+              "type": "string"
+            },
+            "cloudRegion": {
+              "type": "string"
+            },
+            "cloudType": {
+              "$ref": "#/definitions/v1CloudType"
+            },
+            "clusterType": {
+              "type": "string"
+            },
+            "importMode": {
+              "type": "string"
+            },
+            "location": {
+              "$ref": "#/definitions/v1ClusterMetaSpecLocation"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "status": {
+          "description": "Spectro cluster meta status summary",
+          "properties": {
+            "cost": {
+              "$ref": "#/definitions/v1ClusterMetaStatusCost"
+            },
+            "health": {
+              "$ref": "#/definitions/v1ClusterMetaStatusHealth"
+            },
+            "state": {
+              "type": "string"
+            },
+            "updates": {
+              "$ref": "#/definitions/v1ClusterMetaStatusUpdates"
+            }
+          }
+        }
+      }
+    },
     "v1SpectroClusterMetadataFilterSpec": {
       "description": "Spectro cluster filter spec",
       "properties": {
@@ -50238,6 +52236,24 @@
         }
       }
     },
+    "v1SpectroClustersMetadataSearch": {
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1SpectroClusterMetaSummary"
+          }
+        },
+        "listmeta": {
+          "$ref": "#/definitions/v1ListMetaData"
+        }
+      }
+    },
     "v1SpectroClustersSummary": {
       "type": "object",
       "required": [
@@ -51178,6 +53194,30 @@
         }
       }
     },
+    "v1SsoLogin": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "redirectUri": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SsoLogins": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/v1SsoLogin"
+      }
+    },
     "v1StorageAccountEntity": {
       "description": "Azure Storage Account Entity",
       "type": "object",
@@ -51586,6 +53626,9 @@
       "properties": {
         "imagesHostEndpoint": {
           "type": "string"
+        },
+        "stylusImagesEndpoint": {
+          "type": "string"
         }
       }
     },
@@ -51662,6 +53705,21 @@
         }
       }
     },
+    "v1SystemGithubSsoSpec": {
+      "description": "system sso github config spec",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretKey": {
+          "type": "string"
+        },
+        "isEnabled": {
+          "type": "boolean"
+        }
+      }
+    },
     "v1SystemKubectlSpec": {
       "description": "system web kubectl config spec",
       "type": "object",
@@ -51717,6 +53775,72 @@
       "properties": {
         "imagesHostEndpoint": {
           "type": "string"
+        }
+      }
+    },
+    "v1SystemOidcClaims": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "FirstName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "LastName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "SpectroTeam": {
+          "type": "string",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1SystemOidcClientSpec": {
+      "description": "system sso oidc config spec",
+      "type": "object",
+      "properties": {
+        "callbackUrl": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "clientId": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "clientSecret": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "issuerUrl": {
+          "description": "the issuer is the URL identifier for the service",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "logoUrl": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "logoutUrl": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "requiredClaims": {
+          "$ref": "#/definitions/v1SystemOidcClaims"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-omitempty": false
         }
       }
     },
@@ -52102,6 +54226,21 @@
         }
       }
     },
+    "v1SystemSsoAuthSpec": {
+      "description": "system sso config spec",
+      "type": "object",
+      "properties": {
+        "github": {
+          "$ref": "#/definitions/v1SystemGithubSsoSpec"
+        },
+        "oidcAuthSpecs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1SystemOidcClientSpec"
+          }
+        }
+      }
+    },
     "v1SystemSsoSpec": {
       "description": "system sso config spec",
       "type": "object",
@@ -52117,6 +54256,9 @@
         },
         "audienceUrl": {
           "type": "string"
+        },
+        "authSpec": {
+          "$ref": "#/definitions/v1SystemSsoAuthSpec"
         },
         "entityId": {
           "type": "string"
@@ -53096,6 +55238,34 @@
           "uniqueItems": true,
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "v1TenantSsoLogin": {
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1TenantSsoLoginEntity": {
+      "type": "object",
+      "properties": {
+        "isSystemLevelSsoEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "ssoLogins": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1TenantSsoLogin"
           }
         }
       }
@@ -54288,6 +56458,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "loginMode": {
+          "description": "User's login Mode",
+          "type": "string"
+        },
         "projectPermissions": {
           "type": "object",
           "additionalProperties": {
@@ -54499,6 +56673,9 @@
           "type": "string"
         },
         "lastName": {
+          "type": "string"
+        },
+        "loginMode": {
           "type": "string"
         },
         "roles": {
