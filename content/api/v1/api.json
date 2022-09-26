@@ -207,6 +207,107 @@
         }
       ]
     },
+    "/v1/appDeployments/clusterGroup": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Creates a application deployment in one of nested clusters in the cluster group",
+        "operationId": "v1AppDeploymentsClusterGroupCreate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppDeploymentClusterGroupEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created successfully",
+            "schema": {
+              "$ref": "#/definitions/v1Uid"
+            },
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/appDeployments/nestedCluster": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Creates a application deployment in the nested cluster",
+        "operationId": "v1AppDeploymentsNestedClusterCreate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppDeploymentNestedClusterEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created successfully",
+            "schema": {
+              "$ref": "#/definitions/v1Uid"
+            },
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/appDeployments/{uid}": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the specified application deployment",
+        "operationId": "v1AppDeploymentsUidGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1AppDeployment"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Deletes the specified application deployment",
+        "operationId": "v1AppDeploymentsUidDelete",
+        "responses": {
+          "204": {
+            "description": "The resource was deleted successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/v1/appProfiles": {
       "post": {
         "tags": [
@@ -360,8 +461,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The resource was updated successfully"
+          "201": {
+            "description": "Created successfully",
+            "schema": {
+              "$ref": "#/definitions/v1Uid"
+            },
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
           }
         }
       },
@@ -470,8 +580,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The resource was updated successfully"
+          "201": {
+            "description": "Created successfully",
+            "schema": {
+              "$ref": "#/definitions/v1Uid"
+            },
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
           }
         }
       },
@@ -1044,6 +1163,79 @@
         }
       ]
     },
+    "/v1/auth/org/{org}/spectroclusters/{spectroClusterUid}/oidc/dashboard/login": {
+      "get": {
+        "description": "V1AuthOrgSpectroClustersOidcDashboardLogin",
+        "tags": [
+          "v1"
+        ],
+        "summary": "V1AuthOrgSpectroClustersOidcDashboardLogin",
+        "operationId": "V1AuthOrgSpectroClustersOidcDashboardLogin",
+        "parameters": [
+          {
+            "type": "boolean",
+            "default": true,
+            "name": "setCookie",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "org",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "spectroClusterUid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1UserToken"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/org/{org}/spectroclusters/{spectroClusterUid}/oidc/dashboard/validate": {
+      "get": {
+        "description": "V1AuthOrgSpectroClustersOidcDashboardValidate",
+        "tags": [
+          "v1"
+        ],
+        "summary": "V1AuthOrgSpectroClustersOidcDashboardValidate",
+        "operationId": "V1AuthOrgSpectroClustersOidcDashboardValidate",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "org",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "spectroClusterUid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ok reponse without content",
+            "headers": {
+              "AuditUid": {
+                "type": "string",
+                "description": "Audit uid for the request"
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/auth/org/{org}/state": {
       "get": {
         "tags": [
@@ -1265,6 +1457,30 @@
         ],
         "summary": "Returns the list of supported sso logins",
         "operationId": "V1SsoLogins",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "org",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(empty)",
+            "schema": {
+              "$ref": "#/definitions/v1SsoLogins"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/sso/providers": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns the list of supported sso auth providers",
+        "operationId": "V1AuthSsoProviders",
         "responses": {
           "200": {
             "description": "(empty)",
@@ -9503,6 +9719,40 @@
         }
       }
     },
+    "/v1/clustergroups/hostCluster": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Retrieves a list of cluster groups host cluster summary",
+        "operationId": "v1ClusterGroupsHostClusterSummary",
+        "responses": {
+          "200": {
+            "description": "An array of cluster groups of host cluster type summary",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupsHostClusterSummary"
+            }
+          }
+        }
+      }
+    },
+    "/v1/clustergroups/hostCluster/metadata": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Retrieves a list of cluster groups host cluster metadata",
+        "operationId": "v1ClusterGroupsHostClusterMetadata",
+        "responses": {
+          "200": {
+            "description": "An array of cluster groups host cluster metadata items",
+            "schema": {
+              "$ref": "#/definitions/v1ClusterGroupsHostClusterMetadata"
+            }
+          }
+        }
+      }
+    },
     "/v1/clustergroups/teams/{teamUid}/roles": {
       "get": {
         "tags": [
@@ -9707,7 +9957,7 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/v1ClusterGroupHostClusterConfigEntity"
+              "$ref": "#/definitions/v1ClusterGroupClustersConfig"
             }
           }
         ],
@@ -10893,6 +11143,53 @@
         }
       ]
     },
+    "/v1/dashboard/appDeployments": {
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Retrieves a list of application deployments filter summary Supported filter fields - [\"appDeploymentName\", \"clusterUid\", \"tags\"] Supported sort fields - [\"appDeploymentName\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+        "operationId": "v1DashboardAppDeployments",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "default": 50,
+            "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "continue token to paginate the subsequent data items",
+            "name": "continue",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1AppDeploymentsFilterSpec"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of application deployment summary items",
+            "schema": {
+              "$ref": "#/definitions/v1AppDeploymentsSummary"
+            }
+          }
+        }
+      }
+    },
     "/v1/dashboard/appProfiles": {
       "post": {
         "tags": [
@@ -11364,30 +11661,9 @@
         "tags": [
           "v1"
         ],
-        "summary": "Retrieves a list of cluster metadata with provided search filter spec Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+        "summary": "Retrieves a list of cluster metadata with provided search filter spec Supported sort fields - [\"environment\", \"clusterName\", \"clusterState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
         "operationId": "v1SpectroClustersMetadataSearch",
         "parameters": [
-          {
-            "type": "integer",
-            "format": "int64",
-            "default": 50,
-            "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.",
-            "name": "limit",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "format": "int64",
-            "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.",
-            "name": "offset",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "description": "continue token to paginate the subsequent data items",
-            "name": "continue",
-            "in": "query"
-          },
           {
             "name": "body",
             "in": "body",
@@ -16768,7 +17044,7 @@
         }
       }
     },
-    "/v1/pcg/{uid}/services/ally-read-only/manifest": {
+    "/v1/pcg/{uid}/services/ally/manifest": {
       "get": {
         "produces": [
           "application/octet-stream"
@@ -20923,6 +21199,23 @@
         }
       }
     },
+    "/v1/spectroclusters/nested/values": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Get the default values yaml",
+        "operationId": "v1SpectroClustersNestedValues",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "/v1/spectroclusters/openstack": {
       "post": {
         "tags": [
@@ -23191,6 +23484,58 @@
           "required": true
         }
       ]
+    },
+    "/v1/spectroclusters/{uid}/oidc": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns k8s spectrocluster oidc",
+        "operationId": "V1SpectroClustersUidOIDC",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "spc uid",
+            "name": "uid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1SpectroClusterOidcSpec"
+            }
+          }
+        }
+      }
+    },
+    "/v1/spectroclusters/{uid}/oidc/dashboard/url": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Returns k8s dashboard url",
+        "operationId": "V1SpectroClustersUidOIDCDashboardUrl",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "spc uid",
+            "name": "uid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1SectroClusterK8sDashboardUrl"
+            }
+          }
+        }
+      }
     },
     "/v1/spectroclusters/{uid}/pack/manifests/{manifestUid}": {
       "get": {
@@ -28438,6 +28783,52 @@
         }
       ]
     },
+    "/v1/tenants/{tenantUid}/preferences/clusterGroup": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Get is cluster group enabled for a specific tenant",
+        "operationId": "V1TenantPrefClusterGroupGet",
+        "responses": {
+          "200": {
+            "description": "(empty)",
+            "schema": {
+              "$ref": "#/definitions/v1TenantEnableClusterGroup"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Enable or Disable cluster group for a specific tenant",
+        "operationId": "V1TenantPrefClusterGroupUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1TenantEnableClusterGroup"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "tenantUid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/v1/tenants/{tenantUid}/rateConfig": {
       "get": {
         "tags": [
@@ -28576,18 +28967,18 @@
         }
       ]
     },
-    "/v1/tenants/{tenantUid}/sso/loginModes": {
+    "/v1/tenants/{tenantUid}/sso/auth/providers": {
       "get": {
         "tags": [
           "v1"
         ],
         "summary": "get sso logins for the tenants",
-        "operationId": "V1TenantUidSsoLoginModesGet",
+        "operationId": "V1TenantUidSsoAuthProvidersGet",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1TenantSsoLoginEntity"
+              "$ref": "#/definitions/v1TenantSsoAuthProvidersEntity"
             }
           }
         }
@@ -28597,13 +28988,13 @@
           "v1"
         ],
         "summary": "enable sso logins for the tenants",
-        "operationId": "V1TenantUidSsoLoginModesUpdate",
+        "operationId": "V1TenantUidSsoAuthProvidersUpdate",
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/v1TenantSsoLoginEntity"
+              "$ref": "#/definitions/v1TenantSsoAuthProvidersEntity"
             }
           }
         ],
@@ -30379,6 +30770,37 @@
         }
       ]
     },
+    "/v1/users/{uid}/status/loginMode": {
+      "patch": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Users status login mode",
+        "operationId": "v1UsersStatusLoginMode",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/v1UserStatusLoginMode"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource was updated successfully"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "uid",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/v1/workspaces": {
       "post": {
         "tags": [
@@ -31375,6 +31797,384 @@
         }
       }
     },
+    "v1AppDeployment": {
+      "description": "Application deployment response",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1AppDeploymentSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/v1AppDeploymentStatus"
+        }
+      }
+    },
+    "v1AppDeploymentClusterGroupConfigEntity": {
+      "description": "Application deployment cluster group config entity",
+      "type": "object",
+      "properties": {
+        "targetSpec": {
+          "$ref": "#/definitions/v1AppDeploymentClusterGroupTargetSpec"
+        }
+      }
+    },
+    "v1AppDeploymentClusterGroupEntity": {
+      "description": "Application deployment cluster group entity",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMetaInputEntity"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1AppDeploymentClusterGroupSpec"
+        }
+      }
+    },
+    "v1AppDeploymentClusterGroupSpec": {
+      "description": "Application deployment cluster group spec",
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/v1AppDeploymentClusterGroupConfigEntity"
+        },
+        "profile": {
+          "$ref": "#/definitions/v1AppDeploymentProfileEntity"
+        }
+      }
+    },
+    "v1AppDeploymentClusterGroupTargetSpec": {
+      "description": "Application deployment cluster group target spec",
+      "type": "object",
+      "required": [
+        "clusterName",
+        "clusterGroupUid"
+      ],
+      "properties": {
+        "clusterGroupUid": {
+          "type": "string"
+        },
+        "clusterLimits": {
+          "$ref": "#/definitions/v1AppDeploymentTargetClusterLimits"
+        },
+        "clusterName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentClusterRef": {
+      "description": "Application deployment cluster reference",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentConfig": {
+      "description": "Application deployment config response",
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/v1AppDeploymentTargetConfig"
+        }
+      }
+    },
+    "v1AppDeploymentConfigSummary": {
+      "description": "Application deployment config summary",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/v1AppDeploymentTargetConfigSummary"
+        }
+      }
+    },
+    "v1AppDeploymentFilterSpec": {
+      "description": "Application deployment filter spec",
+      "properties": {
+        "appDeploymentName": {
+          "$ref": "#/definitions/v1FilterString"
+        },
+        "clusterUids": {
+          "$ref": "#/definitions/v1FilterArray"
+        },
+        "tags": {
+          "$ref": "#/definitions/v1FilterArray"
+        }
+      }
+    },
+    "v1AppDeploymentNestedClusterConfigEntity": {
+      "description": "Application deployment nested cluster config entity",
+      "type": "object",
+      "properties": {
+        "targetSpec": {
+          "$ref": "#/definitions/v1AppDeploymentNestedClusterTargetSpec"
+        }
+      }
+    },
+    "v1AppDeploymentNestedClusterEntity": {
+      "description": "Application deployment nested cluster entity",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMetaInputEntity"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1AppDeploymentNestedClusterSpec"
+        }
+      }
+    },
+    "v1AppDeploymentNestedClusterSpec": {
+      "description": "Application deployment nested cluster spec",
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/v1AppDeploymentNestedClusterConfigEntity"
+        },
+        "profile": {
+          "$ref": "#/definitions/v1AppDeploymentProfileEntity"
+        }
+      }
+    },
+    "v1AppDeploymentNestedClusterTargetSpec": {
+      "description": "Application deployment nested cluster target spec",
+      "type": "object",
+      "required": [
+        "clusterUid"
+      ],
+      "properties": {
+        "clusterUid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentProfile": {
+      "description": "Application deployment profile response",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1AppDeploymentProfileMeta"
+        },
+        "template": {
+          "$ref": "#/definitions/v1AppProfileTemplate"
+        }
+      }
+    },
+    "v1AppDeploymentProfileEntity": {
+      "description": "Application deployment profile entity",
+      "type": "object",
+      "required": [
+        "appProfileUid"
+      ],
+      "properties": {
+        "appProfileUid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentProfileMeta": {
+      "description": "Application deployment profile metadata",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentProfileMetadataSummary": {
+      "description": "Application deployment profile metadata summary",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentProfileSummary": {
+      "description": "Application deployment profile summary",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1AppDeploymentProfileMetadataSummary"
+        },
+        "template": {
+          "$ref": "#/definitions/v1AppProfileTemplateSummary"
+        }
+      }
+    },
+    "v1AppDeploymentSortFields": {
+      "type": "string",
+      "enum": [
+        "appDeploymentName",
+        "creationTimestamp",
+        "lastModifiedTimestamp"
+      ],
+      "x-nullable": true
+    },
+    "v1AppDeploymentSortSpec": {
+      "properties": {
+        "field": {
+          "$ref": "#/definitions/v1AppDeploymentSortFields"
+        },
+        "order": {
+          "$ref": "#/definitions/v1SortOrder"
+        }
+      }
+    },
+    "v1AppDeploymentSpec": {
+      "description": "Application deployment spec response",
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/v1AppDeploymentConfig"
+        },
+        "profile": {
+          "$ref": "#/definitions/v1AppDeploymentProfile"
+        }
+      }
+    },
+    "v1AppDeploymentStatus": {
+      "description": "Application deployment status response",
+      "type": "object",
+      "properties": {
+        "appTiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ClusterPackStatus"
+          }
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentStatusSummary": {
+      "description": "Application deployment status summary",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentSummary": {
+      "description": "Application deployment summary",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "description": "Application deployment spec summary",
+          "type": "object",
+          "properties": {
+            "config": {
+              "$ref": "#/definitions/v1AppDeploymentConfigSummary"
+            },
+            "profile": {
+              "$ref": "#/definitions/v1AppDeploymentProfileSummary"
+            }
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/v1AppDeploymentStatusSummary"
+        }
+      }
+    },
+    "v1AppDeploymentTargetClusterLimits": {
+      "description": "App deployment target cluster limits",
+      "properties": {
+        "cpu": {
+          "description": "CPU cores",
+          "type": "integer",
+          "format": "int32"
+        },
+        "memoryMiB": {
+          "description": "Memory in MiB",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1AppDeploymentTargetConfig": {
+      "description": "Application deployment target config response",
+      "type": "object",
+      "properties": {
+        "clusterRef": {
+          "$ref": "#/definitions/v1AppDeploymentClusterRef"
+        },
+        "envRef": {
+          "$ref": "#/definitions/v1AppDeploymentTargetEnvironmentRef"
+        }
+      }
+    },
+    "v1AppDeploymentTargetConfigSummary": {
+      "description": "Application deployment target config summary",
+      "properties": {
+        "clusterRef": {
+          "$ref": "#/definitions/v1UidSummary"
+        }
+      }
+    },
+    "v1AppDeploymentTargetEnvironmentRef": {
+      "description": "Application deployment target environment reference",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AppDeploymentsFilterSpec": {
+      "description": "Application deployment filter summary spec",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/v1AppDeploymentFilterSpec"
+        },
+        "sort": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1AppDeploymentSortSpec"
+          }
+        }
+      }
+    },
+    "v1AppDeploymentsSummary": {
+      "type": "object",
+      "properties": {
+        "appDeployments": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1AppDeploymentSummary"
+          }
+        },
+        "listmeta": {
+          "$ref": "#/definitions/v1ListMetaData"
+        }
+      }
+    },
     "v1AppFeatureFreemium": {
       "description": "Freemium information",
       "properties": {
@@ -31438,7 +32238,7 @@
       "type": "object",
       "properties": {
         "metadata": {
-          "$ref": "#/definitions/v1ObjectMeta"
+          "$ref": "#/definitions/v1ObjectMetaInputEntity"
         },
         "spec": {
           "type": "object",
@@ -31632,7 +32432,7 @@
       }
     },
     "v1AppTierEntity": {
-      "description": "App tier input entity for the initial creation",
+      "description": "Application tier input entity for the initial creation",
       "type": "object",
       "required": [
         "name"
@@ -31654,7 +32454,7 @@
         "properties": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1AppTierProperty"
+            "$ref": "#/definitions/v1AppTierPropertyEntity"
           }
         },
         "registryUid": {
@@ -31702,6 +32502,17 @@
         }
       }
     },
+    "v1AppTierPropertyEntity": {
+      "description": "Application tier property entity",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
     "v1AppTierRef": {
       "description": "Application tier reference",
       "type": "object",
@@ -31720,6 +32531,29 @@
         },
         "version": {
           "description": "Application Tier version",
+          "type": "string"
+        }
+      }
+    },
+    "v1AppTierSourceSummary": {
+      "description": "Application profile's tier source information",
+      "properties": {
+        "addonSubType": {
+          "type": "string"
+        },
+        "addonType": {
+          "type": "string"
+        },
+        "logoUrl": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
           "type": "string"
         }
       }
@@ -31775,6 +32609,9 @@
         "name": {
           "type": "string"
         },
+        "source": {
+          "$ref": "#/definitions/v1AppTierSourceSummary"
+        },
         "type": {
           "type": "string"
         },
@@ -31792,18 +32629,13 @@
       "enum": [
         "manifest",
         "helm",
-        "db",
-        "system",
+        "operator-instance",
         "container"
       ]
     },
     "v1AppTierUpdateEntity": {
-      "description": "App tier update entity for the initial creation",
+      "description": "Application tier update entity",
       "type": "object",
-      "required": [
-        "name",
-        "type"
-      ],
       "properties": {
         "installOrder": {
           "type": "integer",
@@ -31821,20 +32653,8 @@
         "properties": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1AppTierProperty"
+            "$ref": "#/definitions/v1AppTierPropertyEntity"
           }
-        },
-        "registryUid": {
-          "type": "string"
-        },
-        "sourceAppTierUid": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/v1AppTierType"
-        },
-        "uid": {
-          "type": "string"
         },
         "values": {
           "type": "string"
@@ -34698,6 +35518,9 @@
         "hostClusterConfig": {
           "$ref": "#/definitions/v1HostClusterConfig"
         },
+        "location": {
+          "$ref": "#/definitions/v1ClusterLocation"
+        },
         "machineManagementConfig": {
           "$ref": "#/definitions/v1MachineManagementConfig"
         },
@@ -34766,10 +35589,28 @@
       }
     },
     "v1ClusterGroupClustersConfig": {
-      "description": "Cluster group clusters config",
+      "description": "Clusters config of cluster group",
       "properties": {
-        "hostClusterConfig": {
-          "$ref": "#/definitions/v1HostClusterConfig"
+        "endpointType": {
+          "description": "Host cluster endpoint type",
+          "type": "string",
+          "enum": [
+            "Ingress",
+            "LoadBalancer"
+          ]
+        },
+        "hostClustersConfig": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1ClusterGroupHostClusterConfig"
+          }
+        },
+        "limitConfig": {
+          "$ref": "#/definitions/v1ClusterGroupLimitConfig"
+        },
+        "values": {
+          "type": "string"
         }
       }
     },
@@ -34784,11 +35625,49 @@
         }
       }
     },
-    "v1ClusterGroupHostClusterConfigEntity": {
-      "description": "Host cluster config in cluster group update entity",
+    "v1ClusterGroupHostClusterConfig": {
       "properties": {
-        "hostClusterConfig": {
-          "$ref": "#/definitions/v1HostClusterConfig"
+        "clusterUid": {
+          "type": "string"
+        },
+        "endpointConfig": {
+          "description": "host cluster endpoint configuration",
+          "$ref": "#/definitions/v1HostClusterEndpointConfig"
+        }
+      }
+    },
+    "v1ClusterGroupLimitConfig": {
+      "description": "Cluster group limit config",
+      "properties": {
+        "cpu": {
+          "description": "CPU cores",
+          "type": "integer",
+          "format": "int32"
+        },
+        "memory": {
+          "description": "Memory in MiB",
+          "type": "integer",
+          "format": "int32"
+        },
+        "overSubscription": {
+          "description": "Over subscription percentage",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ClusterGroupResource": {
+      "description": "Cluster group resource allocated and usage information",
+      "properties": {
+        "allocated": {
+          "type": "number",
+          "format": "float64",
+          "x-omitempty": false
+        },
+        "used": {
+          "type": "number",
+          "format": "float64",
+          "x-omitempty": false
         }
       }
     },
@@ -34867,6 +35746,75 @@
         "isActive": {
           "type": "boolean",
           "x-omitempty": false
+        }
+      }
+    },
+    "v1ClusterGroupSummary": {
+      "description": "Cluster group summay",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/v1ClusterGroupSummarySpec"
+        }
+      }
+    },
+    "v1ClusterGroupSummarySpec": {
+      "description": "Cluster group summay spec",
+      "properties": {
+        "cpu": {
+          "$ref": "#/definitions/v1ClusterGroupResource"
+        },
+        "hostClusters": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1ObjectEntity"
+          }
+        },
+        "memory": {
+          "$ref": "#/definitions/v1ClusterGroupResource"
+        },
+        "nestedClusters": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1ObjectEntity"
+          }
+        },
+        "scope": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterGroupsHostClusterMetadata": {
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1ObjectMeta"
+          }
+        }
+      }
+    },
+    "v1ClusterGroupsHostClusterSummary": {
+      "type": "object",
+      "required": [
+        "summaries"
+      ],
+      "properties": {
+        "summaries": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/v1ClusterGroupSummary"
+          }
         }
       }
     },
@@ -35000,6 +35948,27 @@
           "$ref": "#/definitions/v1ClusterScanTime"
         },
         "state": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterLocation": {
+      "description": "Cluster location information",
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "type": "string"
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "geoLoc": {
+          "$ref": "#/definitions/v1GeolocationLatlong"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "regionName": {
           "type": "string"
         }
       }
@@ -40800,6 +41769,14 @@
           "description": "host cluster configuration",
           "$ref": "#/definitions/v1HostClusterEndpoint"
         },
+        "clusterGroup": {
+          "description": "cluster group reference",
+          "$ref": "#/definitions/v1ObjectReference"
+        },
+        "hostCluster": {
+          "description": "host cluster reference",
+          "$ref": "#/definitions/v1ObjectReference"
+        },
         "isHostCluster": {
           "description": "is enabled as host cluster",
           "type": "boolean",
@@ -42438,6 +43415,9 @@
         },
         "rootDomain": {
           "type": "string"
+        },
+        "ssoLogins": {
+          "$ref": "#/definitions/v1SsoLogins"
         },
         "totalTenants": {
           "type": "number",
@@ -46511,6 +47491,9 @@
             "$ref": "#/definitions/v1IpPoolEntity"
           }
         },
+        "isSelfHosted": {
+          "type": "boolean"
+        },
         "isSystem": {
           "type": "boolean"
         },
@@ -46541,6 +47524,13 @@
         "isReady": {
           "type": "boolean",
           "x-omitempty": false
+        },
+        "kubectlCommands": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
         },
         "state": {
           "type": "string"
@@ -46823,6 +47813,13 @@
     "v1PackFilterSpec": {
       "description": "pack filter spec",
       "properties": {
+        "addOnSubType": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
         "addOnType": {
           "type": "array",
           "uniqueItems": true,
@@ -47168,6 +48165,9 @@
       "description": "Specs of a pack metadata",
       "type": "object",
       "properties": {
+        "addonSubType": {
+          "type": "string"
+        },
         "addonType": {
           "description": "If Layer is Addon, then can specify additional addonType=logging/monitoring/security etc",
           "type": "string"
@@ -47761,6 +48761,9 @@
       "description": "Pack information organized by tags",
       "type": "object",
       "properties": {
+        "addonSubType": {
+          "type": "string"
+        },
         "addonType": {
           "description": "If Layer is Addon, then can specify additional addonType=logging/monitoring/security etc",
           "type": "string"
@@ -47823,6 +48826,78 @@
         }
       }
     },
+    "v1PackTemplate": {
+      "description": "Pack template information",
+      "properties": {
+        "manifest": {
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "#/definitions/v1PackTemplateParameters"
+        },
+        "values": {
+          "type": "string"
+        }
+      }
+    },
+    "v1PackTemplateParameter": {
+      "description": "Pack template parameter",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "listOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "readOnly": {
+          "type": "boolean"
+        },
+        "regex": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1PackTemplateParameters": {
+      "description": "Pack template parameters",
+      "properties": {
+        "inputParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PackTemplateParameter"
+          }
+        },
+        "outputParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PackTemplateParameter"
+          }
+        }
+      }
+    },
     "v1PackType": {
       "type": "string",
       "default": "spectro",
@@ -47850,6 +48925,9 @@
           "items": {
             "$ref": "#/definitions/v1PackSchema"
           }
+        },
+        "template": {
+          "$ref": "#/definitions/v1PackTemplate"
         },
         "values": {
           "description": "values represents the values.yaml used as input parameters",
@@ -50342,6 +51420,15 @@
         "beginsWith"
       ]
     },
+    "v1SectroClusterK8sDashboardUrl": {
+      "description": "Service version information",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      }
+    },
     "v1ServiceImage": {
       "description": "Service image entity",
       "type": "object",
@@ -51163,6 +52250,9 @@
             "$ref": "#/definitions/v1SpectroClusterHealthCondition"
           }
         },
+        "lastHeartBeatTimestamp": {
+          "$ref": "#/definitions/v1Time"
+        },
         "state": {
           "type": "string"
         }
@@ -51182,24 +52272,7 @@
       "type": "object",
       "properties": {
         "location": {
-          "type": "object",
-          "properties": {
-            "countryCode": {
-              "type": "string"
-            },
-            "countryName": {
-              "type": "string"
-            },
-            "geoLoc": {
-              "$ref": "#/definitions/v1GeolocationLatlong"
-            },
-            "regionCode": {
-              "type": "string"
-            },
-            "regionName": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/v1ClusterLocation"
         }
       }
     },
@@ -51339,6 +52412,55 @@
       "properties": {
         "isAvailable": {
           "type": "boolean",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1SpectroClusterOidcClaims": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "FirstName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "LastName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "SpectroTeam": {
+          "type": "string",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1SpectroClusterOidcSpec": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "clientSecret": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "issuerUrl": {
+          "description": "the issuer is the URL identifier for the service",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "requiredClaims": {
+          "$ref": "#/definitions/v1SpectroClusterOidcClaims"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-omitempty": false
         }
       }
@@ -51811,6 +52933,28 @@
         }
       }
     },
+    "v1SpectroClusterSearchSortFields": {
+      "type": "string",
+      "enum": [
+        "environment",
+        "clusterName",
+        "clusterState",
+        "healthState",
+        "creationTimestamp",
+        "lastModifiedTimestamp"
+      ],
+      "x-nullable": true
+    },
+    "v1SpectroClusterSearchSortSpec": {
+      "properties": {
+        "field": {
+          "$ref": "#/definitions/v1SpectroClusterSearchSortFields"
+        },
+        "order": {
+          "$ref": "#/definitions/v1SortOrder"
+        }
+      }
+    },
     "v1SpectroClusterSearchSummarySpec": {
       "description": "Spectro cluster search filter summary spec",
       "properties": {
@@ -51821,7 +52965,7 @@
           "type": "array",
           "uniqueItems": true,
           "items": {
-            "$ref": "#/definitions/v1SpectroClusterSortSpec"
+            "$ref": "#/definitions/v1SpectroClusterSearchSortSpec"
           }
         }
       }
@@ -51904,6 +53048,9 @@
             "$ref": "#/definitions/v1ClusterCondition"
           }
         },
+        "location": {
+          "$ref": "#/definitions/v1ClusterLocation"
+        },
         "nested": {
           "$ref": "#/definitions/v1Nested"
         },
@@ -51983,6 +53130,9 @@
             "hourlyRate": {
               "$ref": "#/definitions/v1ResourceCost"
             },
+            "location": {
+              "$ref": "#/definitions/v1ClusterMetaSpecLocation"
+            },
             "metrics": {
               "$ref": "#/definitions/v1SpectroClusterMetrics"
             },
@@ -52046,6 +53196,9 @@
         },
         "kubeMeta": {
           "$ref": "#/definitions/v1KubeMeta"
+        },
+        "location": {
+          "$ref": "#/definitions/v1ClusterMetaSpecLocation"
         },
         "metrics": {
           "$ref": "#/definitions/v1SpectroClusterMetrics"
@@ -52906,6 +54059,7 @@
               "$ref": "#/definitions/v1ClusterConfigEntity"
             },
             "hostClusterUid": {
+              "description": "Deprecated. Use 'clusterConfig.hostClusterConfig' field",
               "type": "string"
             },
             "machinepoolconfig": {
@@ -53717,6 +54871,10 @@
         },
         "isEnabled": {
           "type": "boolean"
+        },
+        "logoUrl": {
+          "type": "string",
+          "x-omitempty": false
         }
       }
     },
@@ -53825,10 +54983,6 @@
           "x-omitempty": false
         },
         "logoUrl": {
-          "type": "string",
-          "x-omitempty": false
-        },
-        "logoutUrl": {
           "type": "string",
           "x-omitempty": false
         },
@@ -54818,6 +55972,15 @@
         }
       }
     },
+    "v1TenantEnableClusterGroup": {
+      "description": "Enable or Disable cluster group for a tenant",
+      "properties": {
+        "isClusterGroupEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      }
+    },
     "v1TenantEntity": {
       "description": "Tenant Entity",
       "type": "object",
@@ -55227,6 +56390,14 @@
         "lastName": {
           "type": "string"
         },
+        "loginMode": {
+          "type": "string",
+          "default": "dev",
+          "enum": [
+            "dev",
+            "devops"
+          ]
+        },
         "orgEmailId": {
           "type": "string"
         },
@@ -55242,22 +56413,10 @@
         }
       }
     },
-    "v1TenantSsoLogin": {
+    "v1TenantSsoAuthProvidersEntity": {
       "type": "object",
       "properties": {
         "isEnabled": {
-          "type": "boolean",
-          "x-omitempty": false
-        },
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "v1TenantSsoLoginEntity": {
-      "type": "object",
-      "properties": {
-        "isSystemLevelSsoEnabled": {
           "type": "boolean",
           "x-omitempty": false
         },
@@ -55265,7 +56424,7 @@
           "type": "array",
           "uniqueItems": true,
           "items": {
-            "$ref": "#/definitions/v1TenantSsoLogin"
+            "type": "string"
           }
         }
       }
@@ -56753,6 +57912,18 @@
         "lastSignIn": {
           "description": "user's last sign in time",
           "$ref": "#/definitions/v1Time"
+        }
+      }
+    },
+    "v1UserStatusLoginMode": {
+      "type": "object",
+      "properties": {
+        "loginMode": {
+          "type": "string",
+          "enum": [
+            "dev",
+            "devops"
+          ]
         }
       }
     },
