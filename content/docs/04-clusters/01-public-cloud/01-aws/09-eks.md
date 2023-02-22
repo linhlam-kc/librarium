@@ -17,7 +17,7 @@ import PointsOfInterest from 'shared/components/common/PointOfInterest';
 
 Palette supports creating and managing AWS Elastic Kubernetes Service (EKS) clusters deployed to an AWS account. This section guides you on how to create an AWS EKS cluster in AWS that is managed by Palette.
 
-# Prerequisites
+## Prerequisites
 
 The following prerequisites must be met before deploying a cluster to AWS:
 
@@ -48,7 +48,7 @@ The following tags should be added to the virtual private network (VPC) public s
 
 </InfoBox>
 
-# Deploying an AWS Cluster
+## Deploying an AWS Cluster
 
 Use the following steps to provision a new AWS EKS cluster:
 
@@ -156,66 +156,6 @@ The cluster details page of the cluster contains the status and details of the d
 # Validate
 
 You can validate your cluster is up and running by reviewing the cluster details page. Navigate to the left **Main Menu** and click on **Clusters**. The **Clusters** page contains a list of all available clusters managed by Palette. Click on the row for the cluster you wish to review its details page. Ensure the **Cluster Status** field contains the value **Running**.
-
-
-
-
-<!-- # Deploying an EKS Cluster
-
-`video: title: "eks-cluster-creation": ./cluster-creation-videos/eks.mp4`
-
-The following steps need to be performed to provision a new EKS cluster:
-
-1. Provide the basic cluster information like Name, Description, and Tags. Tags on a cluster are propagated to the VMs deployed on the cloud/data center environments.
-
-
-2. Select the Cluster Profile created for the EKS cloud. The profile definition will be used as the cluster construction template.
-
-
-3. Review and override pack parameters, as desired. By default, parameters for all packs are set with values defined in the cluster profile.
-
-
-4. Provide the AWS Cloud account and configure the cluster.
-
-
-   
-
-
-5. Configure the Node Pools.
-
-   * Configure one or more worker node pools. A single worker node will be configured by default.
-
-    |**Parameter**| **Description**|
-    |-------------|----------------|
-    |**Name** | A descriptive name for the node pool.|
-    |**Size** | Make your choice of minimum, maximum and desired sizes for the worker pool. The size of the worker pool will scale between the minimum and maximum size under varying workload conditions.|
-    |[Taints](/clusters/cluster-management/taints#overviewontaints): |Optionally enable node affinity optionally to attracts pods to a set of nodes| 
-    |[Labels](/clusters/cluster-management/taints#overviewonlabels): |Optionally enable Labels to constrain a Pod to only run on a particular set of Node(s)|
-    |**Instance Type** | Select the AWS [instance type](/clusters/public-cloud/eks/#awsinstancetypewithpodcapacity) to be used for all nodes in the node pool.|
-  * Cloud Configuration settings:
-
-     |**Parameter**| **Description**|
-     |-------------|----------------|
-     |**Instance Option**:| Chose between on-demand or spot instances|
-     |**Instance Type**:|Make the selection of the instance type|
-     |**Availability Zones**:|Select at least one availability zone within the VPC|
-     |**Disk Size**|Make the choice of disk size as per requirement|
- *  Optionally, create one or more Fargate Profile(s) to aid the provisioning of on-demand, optimized compute capacity for the workload clusters.
-    
-    |**Parameter**| **Description**|
-    |-------------|---------------|
-    |**Name** |Provide a name for the Fargate profile.|
-    |**Subnets** |Pods running on Fargate Profiles are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter. For dynamic provisioning, this input is not required and subnets are automatically selected.|
-    |**Selectors** |Define pod selector by providing a target namespace and optionally labels. Pods with matching namespace and app labels are scheduled to run on dynamically provisioned compute nodes.<br /> You can have up to five selectors in a Fargate profile and a pod only needs to match one selector to run using the Fargate profile.|
-
-6. Configure the [Cluster Management](/clusters/cluster-management#manageclusters) options as per user requirements.
-
-
-7. Review the settings and deploy the cluster. Provisioning status with details of ongoing provisioning tasks is available to track progress.
-
-<InfoBox>
-New worker pools may be added if it is desired to customize certain worker nodes to run specialized workloads. As an example, the default worker pool may be configured with the <i>m3.large</i> instance types for general-purpose workloads, and another worker pool with instance type <i>g2.2xlarge</i> can be configured to run GPU workloads.
-</InfoBox> -->
 
 # EKS Cluster Secrets Encryption
 
