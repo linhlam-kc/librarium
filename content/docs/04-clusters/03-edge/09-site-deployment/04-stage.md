@@ -72,7 +72,7 @@ The following items are optional and not required but may apply to your use case
 3. Power on the Edge host.
 
 
-4. Wait for the Edge Installer to complete copying content to the hard drive. The Edge host will reboot by default upon completion unless you specify a different option in the Edge Installer configuration user data.
+4. Wait for the Edge Installer to complete copying content to the hard drive. The Edge host will power off by default upon completion unless you specify a different option in the Edge Installer configuration user data.
 
 5. Repeat steps one through four for all Edge hosts.
 
