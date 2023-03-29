@@ -27,7 +27,7 @@ You can deploy a self-hosted flavor of Palette to your own environment. The foll
 
 ## On-Prem Installer 
 
-This is the Palette installer for a self-host flavor of Palette. Refer to the [On-Premise Installation](/enterprise-version) to learn more.
+This is the Palette installer for a self-host flavor of Palette. Refer to the [On Premises Installation](/enterprise-version) to learn more.
 
 |Version|URL|
 |--|---|
